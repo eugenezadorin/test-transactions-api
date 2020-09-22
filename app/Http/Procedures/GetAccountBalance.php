@@ -6,6 +6,7 @@ namespace App\Http\Procedures;
 
 use Illuminate\Http\Request;
 use Sajya\Server\Procedure;
+use App\Models\Account;
 
 class GetAccountBalance extends Procedure
 {
@@ -26,6 +27,7 @@ class GetAccountBalance extends Procedure
      */
     public function handle(Request $request)
     {
-        return ['success' => false, 'message' => 'Method not implemented'];
+        // @todo check access to this account?
+        return Account::findOrFail($request->account_id)->balance;
     }
 }

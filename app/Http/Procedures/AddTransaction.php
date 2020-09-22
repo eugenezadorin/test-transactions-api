@@ -6,6 +6,10 @@ namespace App\Http\Procedures;
 
 use Illuminate\Http\Request;
 use Sajya\Server\Procedure;
+use App\Models\Transaction;
+use App\Enums\TransactionType;
+use App\Enums\TransactionReason;
+use App\Enums\Currency;
 
 class AddTransaction extends Procedure
 {
@@ -26,6 +30,18 @@ class AddTransaction extends Procedure
      */
     public function handle(Request $request)
     {
-        return ['success' => true];
+        // @todo add separate request class and validation logic
+        $transaction = new Transaction;
+        $transaction->account_id = $request->account_id;
+        $transaction->type = new TransactionType($request->type);
+        $transaction->amount = $request->amount;
+        $transaction->currency = new Currency($request->currency);
+        $transaction->reason = new TransactionReason($request->reason);
+
+        $transaction->save();
+        return [
+            'message' => 'Transaction successfully created',
+            'data' => ['transaction_id' => $transaction->id],
+        ];
     }
 }
