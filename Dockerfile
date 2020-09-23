@@ -4,6 +4,7 @@ RUN apt-get update && apt-get install -y \
     libxml2-dev \
     libzip-dev \
     libpng-dev \
+    libonig-dev \
     libjpeg62-turbo-dev \
     zip \
     unzip \
@@ -12,12 +13,12 @@ RUN apt-get update && apt-get install -y \
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN docker-php-ext-install pdo_sqlite mbstring zip exif pcntl bcmath gd
+RUN docker-php-ext-install mbstring zip exif pcntl bcmath gd
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 RUN groupadd -g 1000 web
-RUN useradd -G web,root -u 1000 -s /bin/bash -m -d /home/web web
+RUN useradd -g web -G root -u 1000 -s /bin/bash -m -d /home/web web
 RUN mkdir -p /home/web/.composer && chown -R web:web /home/web
 
 WORKDIR /var/www
