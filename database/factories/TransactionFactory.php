@@ -30,6 +30,8 @@ class TransactionFactory extends Factory
             'type' => TransactionType::debit(),
             'amount' => 1000,
             'currency' => Currency::RUB(),
+            'base_amount' => 1000,
+            'base_currency' => Currency::RUB(),
             'reason' => TransactionReason::refund(),
         ];
     }

@@ -17,8 +17,10 @@ class CreateTransactionsTable extends Migration
             $table->id();
             $table->foreignId('account_id');
             $table->string('type', 50);
-            $table->decimal('amount', 9, 4);
+            $table->bigInteger('amount');
             $table->string('currency', 3);
+            $table->bigInteger('base_amount');
+            $table->string('base_currency', 3);
             $table->string('reason', 50);
             $table->timestamps();
         });

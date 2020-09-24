@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Enums\TransactionType;
+use App\Casts\Currency;
 
 class Account extends Model
 {
@@ -12,6 +13,7 @@ class Account extends Model
 
     protected $casts = [
         'balance' => 'integer',
+        'currency' => Currency::class,
     ];
 
     public function user()
