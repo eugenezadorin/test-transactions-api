@@ -10,4 +10,11 @@ use \Spatie\Enum\Enum;
  */
 class TransactionReason extends Enum
 {
+    public static function all(): array
+    {
+        return [
+            (string)self::stock(),
+            (string)self::refund(),
+        ];
+    }
 }

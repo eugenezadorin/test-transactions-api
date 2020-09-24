@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Http\Procedures;
 
-use Illuminate\Http\Request;
 use Sajya\Server\Procedure;
 use App\Models\Account;
+use App\Http\Requests\GetAccountBalanceRequest;
 
 class GetAccountBalance extends Procedure
 {
@@ -21,13 +21,12 @@ class GetAccountBalance extends Procedure
     /**
      * Execute the procedure.
      *
-     * @param Request $request
+     * @param GetAccountBalanceRequest $request
      *
      * @return array|string|integer
      */
-    public function handle(Request $request)
+    public function handle(GetAccountBalanceRequest $request)
     {
-        // @todo check access to this account?
         return Account::findOrFail($request->account_id)->balance;
     }
 }

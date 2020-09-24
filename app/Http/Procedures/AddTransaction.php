@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Procedures;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\AddTransactionRequest;
 use Sajya\Server\Procedure;
 use App\Models\Transaction;
 use App\Enums\TransactionType;
@@ -24,20 +24,13 @@ class AddTransaction extends Procedure
     /**
      * Execute the procedure.
      *
-     * @param Request $request
+     * @param AddTransactionRequest $request
      *
      * @return array|string|integer
      */
-    public function handle(Request $request)
+    public function handle(AddTransactionRequest $request)
     {
-        // @todo add separate request class and validation logic
-        $transaction = new Transaction;
-        $transaction->account_id = $request->account_id;
-        $transaction->type = new TransactionType($request->type);
-        $transaction->amount = $request->amount;
-        $transaction->currency = new Currency($request->currency);
-        $transaction->reason = new TransactionReason($request->reason);
-
+        $transaction = Transaction::createFromDto($request->getData());
         $transaction->save();
         return [
             'message' => 'Transaction successfully created',

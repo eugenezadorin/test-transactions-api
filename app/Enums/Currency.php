@@ -10,4 +10,12 @@ use \Spatie\Enum\Enum;
  */
 class Currency extends Enum
 {
+    // @todo create BaseEnum class with all() method
+    public static function all(): array
+    {
+        return [
+            (string)self::RUB(),
+            (string)self::USD(),
+        ];
+    }
 }

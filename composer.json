@@ -15,6 +15,7 @@
         "laravel/framework": "^8.0",
         "laravel/tinker": "^2.0",
         "sajya/server": "^2.0",
+        "spatie/data-transfer-object": "^2.5",
         "spatie/enum": "^3.1"
     },
     "require-dev": {

@@ -10,4 +10,11 @@ use \Spatie\Enum\Enum;
  */
 class TransactionType extends Enum
 {
+    public static function all(): array
+    {
+        return [
+            (string)self::debit(),
+            (string)self::credit(),
+        ];
+    }
 }
