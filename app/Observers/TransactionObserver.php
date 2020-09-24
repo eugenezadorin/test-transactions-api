@@ -10,14 +10,12 @@ class TransactionObserver
     /**
      * Handle the transaction "created" event.
      *
-     * @todo Recalculate balance of connected account
-     *
      * @param  \App\Models\Transaction  $transaction
      * @return void
      */
     public function created(Transaction $transaction)
     {
-        //
+        $transaction->account->recalculateBalance();
     }
 
     /**
