@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Procedures\AddTransaction;
 use App\Http\Procedures\GetAccountBalance;
+use App\Http\Procedures\GetWeeklyRefunds;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::rpc('/v1/transactions', [
     AddTransaction::class,
+    GetWeeklyRefunds::class,
 ])->name('rpc.transactions');
 
 Route::rpc('/v1/accounts', [
