@@ -6,7 +6,14 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use App\DTO\CentralBankCurrency;
 use App\Exceptions\CurrenciesCouldNotBeLoaded;
+use Throwable;
 
+/**
+ * Команда выполняет запрос к ЦБ РФ и обновляет курсы валют, сохраняя их в таблицу currency_rates.
+ * Выполняется по расписанию, ежедневно.
+ * @see App\Console\Kernel::schedule()
+ * @package App\Console\Commands
+ */
 class RefreshCurrencyRates extends Command
 {
     const RUB_CODE = 'RUB';
@@ -57,7 +64,7 @@ class RefreshCurrencyRates extends Command
         } catch (CurrenciesCouldNotBeLoaded $e) {
             $this->error($e->getMessage());
             return 1;
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->error(sprintf('Unexpected error [%s]: %s', get_class($e), $e->getMessage()));
             return 2;
         }

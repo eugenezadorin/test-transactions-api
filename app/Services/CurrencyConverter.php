@@ -6,6 +6,12 @@ use App\Enums\Currency;
 use App\Exceptions\CurrencyCannotBeConverted;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * Конвертирует валюты согласно курсам из таблицы currency_rates,
+ * которая ежедневно актуализируется данными ЦБ РФ
+ * @see App\Console\Commands\RefreshCurrencyRates
+ * @package App\Services
+ */
 class CurrencyConverter
 {
     private Currency $from;

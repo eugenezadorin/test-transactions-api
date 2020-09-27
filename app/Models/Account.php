@@ -26,6 +26,12 @@ class Account extends Model
         return $this->hasMany(Transaction::class);
     }
 
+    /**
+     * Пересчитывает баланс счета согласно всем существующим транзакциям,
+     * сохраняет полученное значение в БД и возвращает его.
+     *
+     * @return int
+     */
     public function recalculateBalance(): int
     {
         $debit = $this->transactions()->where('type', TransactionType::debit())->sum('amount');

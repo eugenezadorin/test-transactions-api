@@ -5,12 +5,16 @@ namespace App\Observers;
 use App\Models\Transaction;
 use App\Exceptions\TransactionShouldBeImmutable;
 
+/**
+ * Обработка событий, связанных с транзакциями
+ * @package App\Observers
+ */
 class TransactionObserver
 {
     /**
-     * Handle the transaction "created" event.
+     * Пересчитываем баланс кошелька при создании новой транзакции
      *
-     * @param  \App\Models\Transaction  $transaction
+     * @param Transaction $transaction
      * @return void
      */
     public function created(Transaction $transaction)
@@ -19,10 +23,11 @@ class TransactionObserver
     }
 
     /**
-     * Handle the transaction "updating" event.
+     * Запрещаем изменение транзакций
      *
-     * @param  \App\Models\Transaction  $transaction
+     * @param Transaction $transaction
      * @return void
+     * @throws TransactionShouldBeImmutable
      */
     public function updating(Transaction $transaction)
     {
@@ -30,10 +35,11 @@ class TransactionObserver
     }
 
     /**
-     * Handle the transaction "deleting" event.
+     * Запрещаем удаление транзакций
      *
-     * @param  \App\Models\Transaction  $transaction
+     * @param Transaction $transaction
      * @return void
+     * @throws TransactionShouldBeImmutable
      */
     public function deleting(Transaction $transaction)
     {

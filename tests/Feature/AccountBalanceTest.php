@@ -8,12 +8,14 @@ use App\Enums\TransactionType;
 uses(RefreshDatabase::class);
 
 test('account has zero balance by default', function () {
+    /** @var Account $account */
     $account = Account::factory()->create();
     $balance = $account->recalculateBalance();
     expect($balance)->toBe(0);
 });
 
 test('account balance recalculates on every transaction', function () {
+    /** @var Account $account */
     $account = Account::factory()->create();
 
     $addMoney = Transaction::factory()->create([

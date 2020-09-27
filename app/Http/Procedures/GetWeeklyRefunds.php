@@ -11,6 +11,12 @@ use App\Enums\TransactionType;
 use App\Enums\Currency;
 use App\Services\CurrencyConverter;
 
+/**
+ * Процедура возвращает сумму, полученную по причине refund за последние 7 дней.
+ * Сумма выбирается по всем аккаунтам. В силу того, что аккаунты могут быть в разных валютах,
+ * итоговая сумма конвертируется в рубли по текущему курсу.
+ * @package App\Http\Procedures
+ */
 class GetWeeklyRefunds extends Procedure
 {
     /**
@@ -24,7 +30,7 @@ class GetWeeklyRefunds extends Procedure
     /**
      * Execute the procedure.
      *
-     * @return array|string|integer
+     * @return array
      */
     public function handle()
     {

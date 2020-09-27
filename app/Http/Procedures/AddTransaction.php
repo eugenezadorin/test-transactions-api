@@ -11,6 +11,10 @@ use App\Enums\TransactionType;
 use App\Enums\TransactionReason;
 use App\Enums\Currency;
 
+/**
+ * Процедура регистрирует в системе новую транзакцию и возвращает ее идентификатор
+ * @package App\Http\Procedures
+ */
 class AddTransaction extends Procedure
 {
     /**
@@ -26,7 +30,7 @@ class AddTransaction extends Procedure
      *
      * @param AddTransactionRequest $request
      *
-     * @return array|string|integer
+     * @return array
      */
     public function handle(AddTransactionRequest $request)
     {

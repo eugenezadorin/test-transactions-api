@@ -2,7 +2,9 @@
 
 namespace App\Exceptions;
 
-abstract class BusinessError extends \Exception
+use Exception;
+
+abstract class BusinessError extends Exception
 {
 
 }

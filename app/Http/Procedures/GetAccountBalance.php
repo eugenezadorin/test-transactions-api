@@ -8,6 +8,10 @@ use Sajya\Server\Procedure;
 use App\Models\Account;
 use App\Http\Requests\GetAccountBalanceRequest;
 
+/**
+ * Процедура возвращает значение баланса определенного аккаунта
+ * @package App\Http\Procedures
+ */
 class GetAccountBalance extends Procedure
 {
     /**
@@ -23,7 +27,7 @@ class GetAccountBalance extends Procedure
      *
      * @param GetAccountBalanceRequest $request
      *
-     * @return array|string|integer
+     * @return integer
      */
     public function handle(GetAccountBalanceRequest $request)
     {

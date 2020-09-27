@@ -19,6 +19,12 @@ class Transaction extends Model
         return $this->belongsTo(Account::class);
     }
 
+    /**
+     * Основной метод для создания объекта-транзакции.
+     * Автоматически приводит сумму транзакции к валюте кошелька.
+     * @param TransactionData $data
+     * @return static
+     */
     public static function createFromDto(TransactionData $data): self
     {
         $account = Account::findOrFail($data->account_id);
@@ -28,9 +34,11 @@ class Transaction extends Model
         $transaction->type = new TransactionType($data->type);
         $transaction->reason = new TransactionReason($data->reason);
 
+        // на всякий случай сохраняем исходные значения валюты и суммы транзакции
         $transaction->base_amount = $data->amount;
         $transaction->base_currency = new Currency($data->currency);
 
+        // и при необходимости конвертируем
         if ($account->currency->equals($transaction->base_currency)) {
             $transaction->amount = $data->amount;
             $transaction->currency = new Currency($data->currency);
