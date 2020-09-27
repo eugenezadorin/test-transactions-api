@@ -1,0 +1,8 @@
+{
+    "jsonrpc":"2.0",
+    "method":"GetAccountBalance@handle",
+    "params": {
+        "account_id": 1
+    },
+    "id" : 1
+}
